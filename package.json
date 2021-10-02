@@ -1,0 +1,36 @@
+{
+  "name": "playlist-6-fastify",
+  "version": "0.0.1",
+  "description": "Playist 6 Fastify",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "fastify": "^3.22.0",
+    "fastify-cookie": "^5.3.1",
+    "fastify-formbody": "^5.1.0",
+    "fastify-routes": "^3.0.1",
+    "handlebars": "^4.7.7",
+    "lodash": "^4.17.21",
+    "lowdb": "^1.0.0",
+    "point-of-view": "^4.15.2",
+    "uuid": "^8.3.2"
+  },
+  "repository": {
+    "url": "https://github.com/wit-hdip-comp-sci-2021/playlist-6-fastify"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "fastify"
+  ],
+  "prettier": {
+    "singleQuote": false,
+    "printWidth": 120
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13",
+    "prettier": "^2.4.1"
+  }
+}
