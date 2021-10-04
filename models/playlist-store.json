@@ -4,7 +4,7 @@
       "id": "8b301260-d267-11eb-a8f7-591ae1064ded",
       "userid": "3ad52697-6d98-4d80-8273-084de55a86c0",
       "title": "Beethoven Sonatas",
-      "duration": 28,
+      "duration": 40,
       "songs": [
         {
           "id": "04",
@@ -37,6 +37,11 @@
           "id": "535d02c0-22cc-11ec-a55f-6b869a6bdeb1",
           "title": "sdiio",
           "artist": "sd",
+          "duration": 12
+        },
+        {
+          "id": "37c59bc0-24e9-11ec-9adb-e7c99712a4c4",
+          "title": "wer",
           "duration": 12
         }
       ]
