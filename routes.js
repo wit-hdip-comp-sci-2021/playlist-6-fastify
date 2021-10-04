@@ -8,7 +8,6 @@ const playlist = require("./controllers/playlist.js");
 const song = require("./controllers/song.js");
 
 function register(fastify) {
-  //fastify.get('/', async (req, reply) => accounts.index (req, reply));
   fastify.get("/about", about.index);
 
   fastify.get("/", accounts.index);
@@ -25,6 +24,7 @@ function register(fastify) {
   fastify.get("/playlist/:id", playlist.index);
   fastify.get("/playlist/:id/deletesong/:songid", playlist.deleteSong);
   fastify.post("/playlist/:id/addsong", playlist.addSong);
+
   fastify.get("/song/:id/editsong/:songid", song.index);
   fastify.post("/song/:id/updatesong/:songid", song.update);
 }
