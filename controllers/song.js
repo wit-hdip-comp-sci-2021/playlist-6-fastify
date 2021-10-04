@@ -1,8 +1,8 @@
 "use strict";
 
-const playlistStore = require("../models/playlist-store");
+import { playlistStore } from "../models/playlist-store.js";
 
-const song = {
+export const song = {
   index(request, response) {
     const playlistId = request.params.id;
     const songId = request.params.songid;
@@ -27,5 +27,3 @@ const song = {
     response.redirect("/playlist/" + playlistId);
   }
 };
-
-module.exports = song;

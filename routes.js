@@ -1,13 +1,14 @@
 "use strict";
 
 
-const accounts = require("./controllers/accounts.js");
-const dashboard = require("./controllers/dashboard.js");
-const about = require("./controllers/about.js");
-const playlist = require("./controllers/playlist.js");
-const song = require("./controllers/song.js");
+import { accounts } from "./controllers/accounts.js";
 
-function register(fastify) {
+import { dashboard } from "./controllers/dashboard.js";
+import { about } from "./controllers/about.js";
+import { playlist } from "./controllers/playlist.js";
+import { song } from "./controllers/song.js";
+
+export function register(fastify) {
   fastify.get("/about", about.index);
 
   fastify.get("/", accounts.index);
@@ -28,5 +29,3 @@ function register(fastify) {
   fastify.get("/song/:id/editsong/:songid", song.index);
   fastify.post("/song/:id/updatesong/:songid", song.update);
 }
-
-module.exports = register;

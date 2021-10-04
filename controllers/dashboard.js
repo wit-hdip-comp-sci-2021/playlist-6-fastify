@@ -1,10 +1,10 @@
 "use strict";
 
-const accounts = require("./accounts.js");
-const playlistStore = require("../models/playlist-store");
-const uuid = require("uuid");
+import { accounts } from "./accounts.js";
+import { playlistStore } from "../models/playlist-store.js";
+import { v4 as uuidv4 } from "uuid";
 
-const dashboard = {
+export const dashboard = {
   index(request, response) {
     const loggedInUser = accounts.getCurrentUser(request);
     const viewData = {
@@ -23,7 +23,7 @@ const dashboard = {
   addPlaylist(request, response) {
     const loggedInUser = accounts.getCurrentUser(request);
     const newPlayList = {
-      id: uuid.v1(),
+      id: uuidv4(),
       userid: loggedInUser.id,
       title: request.body.title,
       songs: []
@@ -32,5 +32,3 @@ const dashboard = {
     response.redirect("/dashboard");
   }
 };
-
-module.exports = dashboard;

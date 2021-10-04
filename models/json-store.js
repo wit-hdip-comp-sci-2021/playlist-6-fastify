@@ -1,13 +1,17 @@
 "use strict";
 
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
+import { JSONFile, Low } from "lowdb";
+import lodash from "lodash";
 
-class JsonStore {
+export class JsonStore {
   constructor(file, defaults) {
-    const adapter = new FileSync(file);
-    this.db = low(adapter);
-    this.db.defaults(defaults).value();
+    return (async () => {
+      this.db = new Low(new JSONFile("./models/user-store.json"));
+      this.db.data = defaults;
+      //this.db.chain = lodash.chain(this.db.data);
+      await this.db.read();
+      return this; // when done
+    })();
   }
 
   save() {
@@ -15,11 +19,10 @@ class JsonStore {
   }
 
   add(collection, obj) {
-    this.db
-      .get(collection)
-      .push(obj)
-      .last()
-      .value();
+    const test = this.db;
+    const arr = this.db.data;
+    arr[collection].push(obj);
+    this.db.write();
   }
 
   remove(collection, obj) {
@@ -41,11 +44,9 @@ class JsonStore {
   }
 
   findOneBy(collection, filter) {
-    const results = this.db
-      .get(collection)
-      .filter(filter)
-      .value();
-    return results[0];
+    const data = this.db.data;
+    const results = lodash.find(data.users, filter);
+    return results;
   }
 
   findByIds(collection, ids) {
@@ -64,4 +65,3 @@ class JsonStore {
   }
 }
 
-module.exports = JsonStore;

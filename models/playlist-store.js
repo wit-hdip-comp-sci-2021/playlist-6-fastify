@@ -1,9 +1,9 @@
 "use strict";
 
-const _ = require("lodash");
-const JsonStore = require("./json-store");
+import _ from "lodash";
+import { JsonStore } from "./json-store.js";
 
-const playlistStore = {
+export const playlistStore = {
   store: new JsonStore("./models/playlist-store.json", {
     playlistCollection: []
   }),
@@ -70,5 +70,3 @@ const playlistStore = {
     this.store.save();
   }
 };
-
-module.exports = playlistStore;

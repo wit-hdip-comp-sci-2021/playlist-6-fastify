@@ -1,19 +1,19 @@
 "use strict";
 
-const playlistStore = require("../models/playlist-store");
-const playlistAnalytics = require("../utils/playlist-analytics");
-const uuid = require("uuid");
+import { playlistStore } from "../models/playlist-store.js";
+import { playlistAnalytics } from "../utils/playlist-analytics.js";
+import { v4 as uuidv4 } from "uuid";
 
-const playlist = {
+export const playlist = {
   index(request, response) {
     const playlistId = request.params.id;
     const playlist = playlistStore.getPlaylist(playlistId);
     const viewData = {
       title: "Playlist",
       playlist: playlist,
-      playlistSummary : {
-        shortestSong : playlistAnalytics.getShortestSong(playlist),
-        duration : playlistAnalytics.getPlaylistDuration(playlist)
+      playlistSummary: {
+        shortestSong: playlistAnalytics.getShortestSong(playlist),
+        duration: playlistAnalytics.getPlaylistDuration(playlist)
       }
     };
     response.view("/views/playlist.hbs", viewData);
@@ -30,7 +30,7 @@ const playlist = {
     const playlistId = request.params.id;
     const playlist = playlistStore.getPlaylist(playlistId);
     const newSong = {
-      id: uuid.v1(),
+      id: uuidv4(),
       title: request.body.title,
       artist: request.body.artist,
       duration: Number(request.body.duration)
@@ -40,4 +40,3 @@ const playlist = {
   }
 };
 
-module.exports = playlist;

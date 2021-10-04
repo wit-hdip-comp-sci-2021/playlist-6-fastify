@@ -1,14 +1,13 @@
 "use strict";
+import { v4 as uuidv4 } from "uuid";
+import { userStore } from "../models/user-store.js";
 
-const userstore = require("../models/user-store");
-const uuid = require("uuid");
-
-const accounts = {
+export const accounts = {
   index(request, response) {
     const viewData = {
       title: "Login or Signup"
     };
-    response.view('/views/index.hbs', viewData);
+    response.view("/views/index.hbs", viewData);
   },
 
   login(request, response) {
@@ -32,13 +31,13 @@ const accounts = {
 
   register(request, response) {
     const user = request.body;
-    user.id = uuid.v1();
-    userstore.addUser(user);
+    user.id = uuidv4();
+    userStore.addUser(user);
     response.redirect("/");
   },
 
   authenticate(request, response) {
-    const user = userstore.getUserByEmail(request.body.email);
+    const user = userStore.getUserByEmail(request.body.email);
     if (user) {
       response.setCookie("playlist", user.email);
       response.redirect("/dashboard");
@@ -52,5 +51,3 @@ const accounts = {
     return userstore.getUserByEmail(userEmail);
   }
 };
-
-module.exports = accounts;

@@ -1,10 +1,9 @@
 "use strict";
 
-const _ = require("lodash");
-const JsonStore = require("./json-store");
+import { JsonStore } from "./json-store.js";
 
-const userStore = {
-  store: new JsonStore("./models/user-store.json", { users: [] }),
+export const userStore = {
+  store: await new JsonStore("./models/user-store.json", { users: [] }),
   collection: "users",
 
   getAllUsers() {
@@ -13,7 +12,6 @@ const userStore = {
 
   addUser(user) {
     this.store.add(this.collection, user);
-    this.store.save();
   },
 
   getUserById(id) {
@@ -24,5 +22,3 @@ const userStore = {
     return this.store.findOneBy(this.collection, { email: email });
   }
 };
-
-module.exports = userStore;

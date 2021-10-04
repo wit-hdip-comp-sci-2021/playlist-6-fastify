@@ -1,6 +1,6 @@
 "use strict";
 
-const playlistAnalytics = {
+export const playlistAnalytics = {
   getShortestSong(playlist) {
     let shortestSong = null;
     if (playlist.songs.length > 0) {
@@ -23,5 +23,3 @@ const playlistAnalytics = {
     return playlistDuration;
   }
 };
-
-module.exports = playlistAnalytics;

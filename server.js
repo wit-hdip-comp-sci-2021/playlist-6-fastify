@@ -1,10 +1,19 @@
 "use strict";
 
-const fastify = require("fastify")();
+//const fastify = require("fastify")();
+import fastify from "fastify";
+import pointOfView from "point-of-view";
+import formBody from "fastify-formbody";
+import cookie from "fastify-cookie";
+import handlebars from "handlebars";
 
-fastify.register(require("point-of-view"), {
+import { register } from "./routes.js";
+
+const app = fastify();
+
+app.register(pointOfView, {
   engine: {
-    handlebars: require("handlebars")
+    handlebars: handlebars
   },
   layout: "./views/layouts/main.hbs",
   includeViewExtension: true,
@@ -14,23 +23,23 @@ fastify.register(require("point-of-view"), {
       menu: "/views/partials/menu.hbs",
       listplaylists: "/views/partials/listplaylists.hbs",
       addplaylist: "/views/partials/addplaylist.hbs",
-      listsongs:"/views/partials/listsongs.hbs",
-      addsong: "/views/partials/addsong.hbs",
+      listsongs: "/views/partials/listsongs.hbs",
+      addsong: "/views/partials/addsong.hbs"
     }
   }
 });
 
-fastify.register(require("fastify-formbody"));
+app.register(formBody);
 
-fastify.register(require("fastify-cookie"), {
+app.register(cookie, {
   secret: "my-secret", // for cookies signature
   parseOptions: {}     // options for parsing cookies
 });
 
-const register = require("./routes");
+//const register = require("./routes");
 
-register(fastify);
-fastify.listen(3000, err => {
+register(app);
+app.listen(3000, err => {
   if (err) throw err;
-  console.log(`server listening on ${fastify.server.address().port}`);
+  console.log(`server listening on ${app.server.address().port}`);
 });
