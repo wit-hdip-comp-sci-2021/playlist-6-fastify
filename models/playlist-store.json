@@ -6,17 +6,49 @@
       "title": "gtmor",
       "songs": [
         {
-          "id": "cef6aba8-259e-44ed-ba01-0da815781ecc",
-          "title": "wewew",
-          "duration": null
+          "id": "ecd83600-bca7-4d75-8129-1bfdaeb69205",
+          "title": "12",
+          "artist": "12",
+          "duration": 12
         },
         {
-          "id": "013ea352-a36e-4829-bb9e-6a2a4af4b802",
-          "title": "wdw",
-          "duration": null
+          "id": "af0d15bd-8fe1-4cce-b4c8-28f51eae7b3c",
+          "title": "qwer",
+          "artist": "wer",
+          "duration": 132
+        },
+        {
+          "id": "0dd345f5-e1f7-4887-9c7d-a37bad4f1bf0",
+          "title": "23",
+          "artist": "23",
+          "duration": 23
+        },
+        {
+          "id": "8fa94a78-29df-4804-88f2-a4aea8790e7e",
+          "title": "23",
+          "artist": "23",
+          "duration": 23
+        },
+        {
+          "id": "23c00646-27a9-424e-ad39-f9d084562c9c",
+          "title": "23",
+          "artist": "23",
+          "duration": 23
+        },
+        {
+          "id": "10097f28-2ffe-4795-a403-0d7f4e5f5523",
+          "title": "23",
+          "artist": "23",
+          "duration": 23
+        },
+        {
+          "id": "a2c5c233-a1d5-4736-8fd9-aaef270605f8",
+          "title": "23",
+          "artist": "23",
+          "duration": 23
         }
       ],
-      "duration": 448
+      "duration": 271
     },
     {
       "id": "45d6b522-c8e9-4582-915b-2f1134741020",
@@ -60,9 +92,27 @@
           "title": "qs",
           "artist": "",
           "duration": 0
+        },
+        {
+          "id": "5eb6d865-f115-44f4-b94b-b73d0000fcfc",
+          "title": "wdef",
+          "artist": "ewf",
+          "duration": 22
+        },
+        {
+          "id": "50b9951b-ac8c-4615-bd7a-3ba12c3ebb0d",
+          "title": "erth",
+          "artist": "rh",
+          "duration": 12
+        },
+        {
+          "id": "532ec943-fc36-4922-aaaa-4285895c0830",
+          "title": "erth",
+          "artist": "rh",
+          "duration": 12
         }
       ],
-      "duration": 81
+      "duration": 124
     }
   ]
 }

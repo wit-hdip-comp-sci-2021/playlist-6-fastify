@@ -11,8 +11,8 @@ export class JsonStore {
     return this;
   }
 
-  save() {
-    this.db.write();
+  async save() {
+    await this.db.write();
   }
   async findBy(collection, filter) {
     await this.db.read();

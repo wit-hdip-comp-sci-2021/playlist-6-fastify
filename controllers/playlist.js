@@ -4,7 +4,7 @@ import { playlistStore } from "../models/playlist-store.js";
 import { playlistAnalytics } from "../utils/playlist-analytics.js";
 import { v4 as uuidv4 } from "uuid";
 
-export const playlist = {
+export const playlistController = {
   async index(request, response) {
     const playlistId = request.params.id;
     const playlist = await playlistStore.getPlaylist(playlistId);
