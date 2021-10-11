@@ -5,63 +5,41 @@ import lodash from "lodash";
 
 export class JsonStore {
   constructor(file, defaults) {
-    return (async () => {
-      this.db = new Low(new JSONFile("./models/user-store.json"));
-      this.db.data = defaults;
-      //this.db.chain = lodash.chain(this.db.data);
-      await this.db.read();
-      return this; // when done
-    })();
+    this.db = new Low(new JSONFile(file));
+    this.db.data = defaults;
+    this.db.read();
+    return this;
   }
 
   save() {
     this.db.write();
   }
-
-  add(collection, obj) {
-    const test = this.db;
-    const arr = this.db.data;
-    arr[collection].push(obj);
-    this.db.write();
-  }
-
-  remove(collection, obj) {
-    this.db
-      .get(collection)
-      .remove(obj)
-      .value();
-  }
-
-  removeAll(collection) {
-    this.db
-      .get(collection)
-      .remove()
-      .value();
-  }
-
-  findAll(collection) {
-    return this.db.get(collection).value();
-  }
-
-  findOneBy(collection, filter) {
-    const data = this.db.data;
-    const results = lodash.find(data.users, filter);
+  async findBy(collection, filter) {
+    await this.db.read();
+    const objects = this.db.data[collection];
+    const results = lodash.filter(objects, filter);
     return results;
   }
 
-  findByIds(collection, ids) {
-    return this.db
-      .get(collection)
-      .keyBy("id")
-      .at(ids)
-      .value();
+  async findOneBy(collection, filter) {
+    await this.db.read();
+    const objects = this.db.data[collection];
+    const result = lodash.find(objects, filter);
+    return result;
   }
 
-  findBy(collection, filter) {
-    return this.db
-      .get(collection)
-      .filter(filter)
-      .value();
+  async add(collection, obj) {
+    await this.db.read();
+    const objects = this.db.data[collection];
+    objects.push(obj);
+    await this.db.write();
+  }
+
+  async remove(collection, obj) {
+    await this.db.read();
+    const objects = this.db.data[collection];
+    lodash.remove(objects,obj);
+    await this.db.write();
   }
 }
 

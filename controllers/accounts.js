@@ -36,8 +36,8 @@ export const accounts = {
     response.redirect("/");
   },
 
-  authenticate(request, response) {
-    const user = userStore.getUserByEmail(request.body.email);
+  async authenticate(request, response) {
+    const user = await userStore.getUserByEmail(request.body.email);
     if (user) {
       response.setCookie("playlist", user.email);
       response.redirect("/dashboard");
@@ -46,8 +46,8 @@ export const accounts = {
     }
   },
 
-  getCurrentUser(request) {
+  async getCurrentUser(request) {
     const userEmail = request.cookies.playlist;
-    return userstore.getUserByEmail(userEmail);
+    return await userStore.getUserByEmail(userEmail);
   }
 };

@@ -5,23 +5,24 @@ import { playlistStore } from "../models/playlist-store.js";
 import { v4 as uuidv4 } from "uuid";
 
 export const dashboard = {
-  index(request, response) {
-    const loggedInUser = accounts.getCurrentUser(request);
+  async index(request, response) {
+    const loggedInUser = await accounts.getCurrentUser(request);
+    const playlists = await playlistStore.getUserPlaylists(loggedInUser.id)
     const viewData = {
       title: "Playlist Dashboard",
-      playlists: playlistStore.getUserPlaylists(loggedInUser.id)
+      playlists: playlists
     };
     response.view("/views/dashboard.hbs", viewData);
   },
 
-  deletePlaylist(request, response) {
+  async deletePlaylist(request, response) {
     const playlistId = request.params.id;
-    playlistStore.removePlaylist(playlistId);
+    await playlistStore.removePlaylist(playlistId);
     response.redirect("/dashboard");
   },
 
-  addPlaylist(request, response) {
-    const loggedInUser = accounts.getCurrentUser(request);
+  async addPlaylist(request, response) {
+    const loggedInUser = await accounts.getCurrentUser(request);
     const newPlayList = {
       id: uuidv4(),
       userid: loggedInUser.id,

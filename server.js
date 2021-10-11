@@ -1,13 +1,12 @@
 "use strict";
 
-//const fastify = require("fastify")();
 import fastify from "fastify";
 import pointOfView from "point-of-view";
 import formBody from "fastify-formbody";
 import cookie from "fastify-cookie";
 import handlebars from "handlebars";
 
-import { register } from "./routes.js";
+import { routes } from "./routes.js";
 
 const app = fastify();
 
@@ -30,15 +29,12 @@ app.register(pointOfView, {
 });
 
 app.register(formBody);
-
 app.register(cookie, {
   secret: "my-secret", // for cookies signature
   parseOptions: {}     // options for parsing cookies
 });
 
-//const register = require("./routes");
-
-register(app);
+routes(app);
 app.listen(3000, err => {
   if (err) throw err;
   console.log(`server listening on ${app.server.address().port}`);

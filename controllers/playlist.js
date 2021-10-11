@@ -5,9 +5,9 @@ import { playlistAnalytics } from "../utils/playlist-analytics.js";
 import { v4 as uuidv4 } from "uuid";
 
 export const playlist = {
-  index(request, response) {
+  async index(request, response) {
     const playlistId = request.params.id;
-    const playlist = playlistStore.getPlaylist(playlistId);
+    const playlist = await playlistStore.getPlaylist(playlistId);
     const viewData = {
       title: "Playlist",
       playlist: playlist,
@@ -19,24 +19,28 @@ export const playlist = {
     response.view("/views/playlist.hbs", viewData);
   },
 
-  deleteSong(request, response) {
+  async deleteSong(request, response) {
     const playlistId = request.params.id;
     const songId = request.params.songid;
-    playlistStore.removeSong(playlistId, songId);
+    await playlistStore.removeSong(playlistId, songId);
     response.redirect("/playlist/" + playlistId);
   },
 
-  addSong(request, response) {
+  async addSong(request, response) {
     const playlistId = request.params.id;
-    const playlist = playlistStore.getPlaylist(playlistId);
-    const newSong = {
-      id: uuidv4(),
-      title: request.body.title,
-      artist: request.body.artist,
-      duration: Number(request.body.duration)
-    };
-    playlistStore.addSong(playlistId, newSong);
-    response.redirect("/playlist/" + playlistId);
+    if (request.validationError) {
+      response.redirect("/playlist/" + playlistId);
+    } else {
+      const playlist = await playlistStore.getPlaylist(playlistId);
+      const newSong = {
+        id: uuidv4(),
+        title: request.body.title,
+        artist: request.body.artist,
+        duration: Number(request.body.duration)
+      };
+      await playlistStore.addSong(playlistId, newSong);
+      response.redirect("/playlist/" + playlistId);
+    }
   }
 };
 

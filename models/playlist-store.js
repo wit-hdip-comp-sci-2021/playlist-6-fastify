@@ -13,32 +13,29 @@ export const playlistStore = {
     return this.store.findAll(this.collection);
   },
 
-  getPlaylist(id) {
-    return this.store.findOneBy(this.collection, { id: id });
+  async getPlaylist(id) {
+    return await this.store.findOneBy(this.collection, { id: id });
   },
 
-  getUserPlaylists(userid) {
-    return this.store.findBy(this.collection, { userid: userid });
+  async getUserPlaylists(userid) {
+    return await this.store.findBy(this.collection, { userid: userid });
   },
 
   addPlaylist(playlist) {
     this.store.add(this.collection, playlist);
-    this.store.save();
   },
 
-  removePlaylist(id) {
-    const playlist = this.getPlaylist(id);
-    this.store.remove(this.collection, playlist);
-    this.store.save();
+  async removePlaylist(id) {
+    const playlist = await this.getPlaylist(id);
+    await this.store.remove(this.collection, playlist);
   },
 
   removeAllPlaylists() {
     this.store.removeAll(this.collection);
-    this.store.save();
   },
 
-  addSong(id, song) {
-    const playlist = this.getPlaylist(id);
+  async addSong(id, song) {
+    const playlist = await this.getPlaylist(id);
     playlist.songs.push(song);
 
     let duration = 0;
@@ -47,26 +44,26 @@ export const playlistStore = {
     }
 
     playlist.duration = duration;
-    this.store.save();
+    await this.store.save();
   },
 
-  removeSong(id, songId) {
-    const playlist = this.getPlaylist(id);
+  async removeSong(id, songId) {
+    const playlist = await this.getPlaylist(id);
     const songs = playlist.songs;
     _.remove(songs, { id: songId });
-    this.store.save();
+    await this.store.save();
   },
 
-  getSong(id, songId) {
-    const playList = this.store.findOneBy(this.collection, { id: id });
+  async getSong(id, songId) {
+    const playList = await this.store.findOneBy(this.collection, { id: id });
     const songs = playList.songs.filter(song => song.id == songId);
     return songs[0];
   },
 
-  updateSong(song, updatedSong) {
+  async updateSong(song, updatedSong) {
     song.title = updatedSong.title;
     song.artist = updatedSong.artist;
     song.duration = updatedSong.duration;
-    this.store.save();
+    await this.store.save();
   }
 };

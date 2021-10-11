@@ -1,18 +1,11 @@
 {
   "users": [
     {
-      "firstName": "test",
-      "lastName": "s",
-      "email": "s",
-      "password": "s",
-      "id": "c36d3d30-4584-4f59-8b99-cc95dc090d75"
-    },
-    {
-      "firstName": "y",
-      "lastName": "y",
-      "email": "y",
-      "password": "y",
-      "id": "20938d51-668b-4bfb-9edb-76fb82684f21"
+      "firstName": "a",
+      "lastName": "a",
+      "email": "a",
+      "password": "a",
+      "id": "5725f975-f45c-4eb7-b90d-6ff6867b5745"
     }
   ]
 }

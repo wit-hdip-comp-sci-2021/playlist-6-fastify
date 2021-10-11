@@ -3,7 +3,7 @@
 import { JsonStore } from "./json-store.js";
 
 export const userStore = {
-  store: await new JsonStore("./models/user-store.json", { users: [] }),
+  store: new JsonStore("./models/user-store.json", { users: [] }),
   collection: "users",
 
   getAllUsers() {
@@ -18,7 +18,7 @@ export const userStore = {
     return this.store.findOneBy(this.collection, { id: id });
   },
 
-  getUserByEmail(email) {
-    return this.store.findOneBy(this.collection, { email: email });
+  async getUserByEmail(email) {
+    return await this.store.findOneBy(this.collection, { email: email });
   }
 };

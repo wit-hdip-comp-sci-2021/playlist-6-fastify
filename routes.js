@@ -1,31 +1,47 @@
 "use strict";
 
-
 import { accounts } from "./controllers/accounts.js";
-
 import { dashboard } from "./controllers/dashboard.js";
 import { about } from "./controllers/about.js";
 import { playlist } from "./controllers/playlist.js";
 import { song } from "./controllers/song.js";
 
-export function register(fastify) {
-  fastify.get("/about", about.index);
+const SongSchema = {
+  type: "object",
+  properties: {
+    title: { type: "string" },
+    artist: { type: "string" },
+    duration: { type: "integer" }
+  }
+};
 
-  fastify.get("/", accounts.index);
-  fastify.get("/login", accounts.login);
-  fastify.get("/signup", accounts.signup);
-  fastify.get("/logout", accounts.logout);
-  fastify.post("/register", accounts.register);
-  fastify.post("/authenticate", accounts.authenticate);
+export function routes(app) {
+  app.get("/about", about.index);
 
-  fastify.get("/dashboard", dashboard.index);
-  fastify.post("/dashboard/addplaylist", dashboard.addPlaylist);
-  fastify.get("/dashboard/deleteplaylist/:id", dashboard.deletePlaylist);
+  app.get("/", accounts.index);
+  app.get("/login", accounts.login);
+  app.get("/signup", accounts.signup);
+  app.get("/logout", accounts.logout);
+  app.post("/register", accounts.register);
+  app.post("/authenticate", accounts.authenticate);
 
-  fastify.get("/playlist/:id", playlist.index);
-  fastify.get("/playlist/:id/deletesong/:songid", playlist.deleteSong);
-  fastify.post("/playlist/:id/addsong", playlist.addSong);
+  app.get("/dashboard", dashboard.index);
+  app.post("/dashboard/addplaylist", dashboard.addPlaylist);
+  app.get("/dashboard/deleteplaylist/:id", dashboard.deletePlaylist);
 
-  fastify.get("/song/:id/editsong/:songid", song.index);
-  fastify.post("/song/:id/updatesong/:songid", song.update);
+  app.get("/playlist/:id", playlist.index);
+  app.get("/playlist/:id/deletesong/:songid", playlist.deleteSong);
+ // app.post("/playlist/:id/addsong", playlist.addSong);
+
+  app.post("/playlist/:id/addsong", {
+    schema: {
+      body: SongSchema,
+    },
+    attachValidation: true,
+    handler: playlist.addSong
+  });
+
+
+  app.get("/song/:id/editsong/:songid",   song.index);
+  app.post("/song/:id/updatesong/:songid", song.update);
 }
