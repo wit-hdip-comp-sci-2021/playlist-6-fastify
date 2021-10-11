@@ -5,16 +5,24 @@ import { playlistAnalytics } from "../utils/playlist-analytics.js";
 import { v4 as uuidv4 } from "uuid";
 
 export const playlistController = {
+  validationError : null,
+
   async index(request, response) {
     const playlistId = request.params.id;
     const playlist = await playlistStore.getPlaylist(playlistId);
+    let errorMsg = null;
+    if (playlistController.validationError) {
+      errorMsg = playlistController.validationError.message;
+      playlistController.validationError = null;
+    }
     const viewData = {
       title: "Playlist",
       playlist: playlist,
       playlistSummary: {
         shortestSong: playlistAnalytics.getShortestSong(playlist),
         duration: playlistAnalytics.getPlaylistDuration(playlist)
-      }
+      },
+      errors: errorMsg
     };
     response.view("/views/playlist-view.hbs", viewData);
   },
@@ -29,6 +37,7 @@ export const playlistController = {
   async addSong(request, response) {
     const playlistId = request.params.id;
     if (request.validationError) {
+      playlistController.validationError = request.validationError;
       response.redirect("/playlist/" + playlistId);
     } else {
       const playlist = await playlistStore.getPlaylist(playlistId);

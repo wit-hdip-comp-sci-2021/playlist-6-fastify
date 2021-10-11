@@ -23,7 +23,8 @@ app.register(pointOfView, {
       listplaylists: "/views/partials/listplaylists.hbs",
       addplaylist: "/views/partials/addplaylist.hbs",
       listsongs: "/views/partials/listsongs.hbs",
-      addsong: "/views/partials/addsong.hbs"
+      addsong: "/views/partials/addsong.hbs",
+      error:"/views/partials/error.hbs"
     }
   }
 });
