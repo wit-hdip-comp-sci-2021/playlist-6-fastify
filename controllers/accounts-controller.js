@@ -2,7 +2,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { userStore } from "../models/user-store.js";
 
-export const accounts = {
+export const accountsController = {
   index(request, response) {
     const viewData = {
       title: "Login or Signup"
@@ -14,7 +14,7 @@ export const accounts = {
     const viewData = {
       title: "Login to the Service"
     };
-    response.view("/views/login", viewData);
+    response.view("/views/login-view", viewData);
   },
 
   logout(request, response) {
@@ -26,7 +26,7 @@ export const accounts = {
     const viewData = {
       title: "Login to the Service"
     };
-    response.view("/views/signup", viewData);
+    response.view("/views/signup-view", viewData);
   },
 
   register(request, response) {
@@ -42,7 +42,7 @@ export const accounts = {
       response.setCookie("playlist", user.email);
       response.redirect("/dashboard");
     } else {
-      response.redirect("/login");
+      response.redirect("/login-view");
     }
   },
 

@@ -16,7 +16,7 @@ export const playlistController = {
         duration: playlistAnalytics.getPlaylistDuration(playlist)
       }
     };
-    response.view("/views/playlist.hbs", viewData);
+    response.view("/views/playlist-view.hbs", viewData);
   },
 
   async deleteSong(request, response) {

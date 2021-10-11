@@ -26,6 +26,9 @@
     "node",
     "fastify"
   ],
+  "engines": {
+    "node": "14.x"
+  },
   "prettier": {
     "singleQuote": false,
     "printWidth": 120

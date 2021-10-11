@@ -1,10 +1,10 @@
 "use strict";
 
-import { accounts } from "./controllers/accounts.js";
-import { dashboard } from "./controllers/dashboard.js";
-import { about } from "./controllers/about.js";
-import { playlistController } from "./controllers/playlist.js";
-import { song } from "./controllers/song.js";
+import { accountsController } from "./controllers/accounts-controller.js";
+import { dashboardController } from "./controllers/dashboard-controller.js";
+import { aboutController } from "./controllers/about-controller.js";
+import { playlistController } from "./controllers/playlist-controller.js";
+import { songController } from "./controllers/song-controller.js";
 
 const SongSchema = {
   type: "object",
@@ -16,18 +16,18 @@ const SongSchema = {
 };
 
 export function routes(app) {
-  app.get("/about", about.index);
+  app.get("/about", aboutController.index);
 
-  app.get("/", accounts.index);
-  app.get("/login", accounts.login);
-  app.get("/signup", accounts.signup);
-  app.get("/logout", accounts.logout);
-  app.post("/register", accounts.register);
-  app.post("/authenticate", accounts.authenticate);
+  app.get("/", accountsController.index);
+  app.get("/login", accountsController.login);
+  app.get("/signup", accountsController.signup);
+  app.get("/logout", accountsController.logout);
+  app.post("/register", accountsController.register);
+  app.post("/authenticate", accountsController.authenticate);
 
-  app.get("/dashboard", dashboard.index);
-  app.post("/dashboard/addplaylist", dashboard.addPlaylist);
-  app.get("/dashboard/deleteplaylist/:id", dashboard.deletePlaylist);
+  app.get("/dashboard", dashboardController.index);
+  app.post("/dashboard/addplaylist", dashboardController.addPlaylist);
+  app.get("/dashboard/deleteplaylist/:id", dashboardController.deletePlaylist);
 
   app.get("/playlist/:id", playlistController.index);
   app.get("/playlist/:id/deletesong/:songid", playlistController.deleteSong);
@@ -41,7 +41,6 @@ export function routes(app) {
     handler: playlistController.addSong
   });
 
-
-  app.get("/song/:id/editsong/:songid",   song.index);
-  app.post("/song/:id/updatesong/:songid", song.update);
+  app.get("/song/:id/editsong/:songid",   songController.index);
+  app.post("/song/:id/updatesong/:songid", songController.update);
 }

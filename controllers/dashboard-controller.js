@@ -1,18 +1,18 @@
 "use strict";
 
-import { accounts } from "./accounts.js";
+import { accountsController } from "./accounts-controller.js";
 import { playlistStore } from "../models/playlist-store.js";
 import { v4 as uuidv4 } from "uuid";
 
-export const dashboard = {
+export const dashboardController = {
   async index(request, response) {
-    const loggedInUser = await accounts.getCurrentUser(request);
+    const loggedInUser = await accountsController.getCurrentUser(request);
     const playlists = await playlistStore.getUserPlaylists(loggedInUser.id)
     const viewData = {
       title: "Playlist Dashboard",
       playlists: playlists
     };
-    response.view("/views/dashboard.hbs", viewData);
+    response.view("/views/dashboard-view.hbs", viewData);
   },
 
   async deletePlaylist(request, response) {
@@ -22,7 +22,7 @@ export const dashboard = {
   },
 
   async addPlaylist(request, response) {
-    const loggedInUser = await accounts.getCurrentUser(request);
+    const loggedInUser = await accountsController.getCurrentUser(request);
     const newPlayList = {
       id: uuidv4(),
       userid: loggedInUser.id,

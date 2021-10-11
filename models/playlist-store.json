@@ -30,12 +30,6 @@
           "duration": 23
         },
         {
-          "id": "23c00646-27a9-424e-ad39-f9d084562c9c",
-          "title": "23",
-          "artist": "23",
-          "duration": 23
-        },
-        {
           "id": "10097f28-2ffe-4795-a403-0d7f4e5f5523",
           "title": "23",
           "artist": "23",
@@ -56,25 +50,19 @@
       "title": "wertw",
       "songs": [
         {
-          "id": "2a8ea251-c0e8-41e6-acb9-47351d1024ac",
-          "title": "wet",
-          "artist": "ret",
-          "duration": 34
-        },
-        {
           "id": "33615b54-0122-4d7a-9a9b-cafa066e0797",
           "title": "34",
           "artist": "34",
           "duration": 44
         },
         {
-          "id": "77b8b2b5-e537-4698-8893-430b14313e9a",
-          "title": "qsaaa",
-          "artist": "s",
-          "duration": 12
+          "id": "8f70701d-4f20-4d6e-8b23-ffae60e59b06",
+          "title": "w",
+          "artist": "w",
+          "duration": 2
         }
       ],
-      "duration": 90
+      "duration": 80
     },
     {
       "id": "ce01720e-3ad2-4e15-a857-d7163c030cc7",
@@ -113,6 +101,13 @@
         }
       ],
       "duration": 124
+    },
+    {
+      "id": "99af3694-c10f-4035-9bbc-bb3d94504f56",
+      "userid": "5725f975-f45c-4eb7-b90d-6ff6867b5745",
+      "title": "3rt234t",
+      "songs": [],
+      "duration": 34
     }
   ]
 }

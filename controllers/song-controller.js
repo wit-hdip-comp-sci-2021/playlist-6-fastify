@@ -2,7 +2,7 @@
 
 import { playlistStore } from "../models/playlist-store.js";
 
-export const song = {
+export const songController = {
   async index(request, response) {
     const playlistId = request.params.id;
     const songId = request.params.songid;
@@ -13,7 +13,7 @@ export const song = {
       playlist: playlist,
       song: song
     };
-    response.view("/views/song.hbs", viewData);
+    response.view("/views/songController.hbs", viewData);
   },
 
   async update(request, response) {
